@@ -7,7 +7,7 @@ class UserRead(BaseModel):
     role: str
 
     class Config:
-        orm_mode = True
+        from_attributes= True
 
 # For creating/updating users
 class UserCreate(BaseModel):
@@ -16,4 +16,4 @@ class UserCreate(BaseModel):
     # add password or other fields if required
 
     class Config:
-        orm_mode = True
+        from_attributes = True

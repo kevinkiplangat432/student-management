@@ -13,7 +13,7 @@ class UserResponse(UserBase):
     role: str
 
     class Config:
-        orm_mode = True  
+        from_attributes = True  
 
 class StudentBase(BaseModel):
     name: str
@@ -27,7 +27,7 @@ class StudentResponse(StudentBase):
     courses: List["CourseResponse"] = []
 
     class Config:
-        orm_mode = True
+        from_attribute = True
 
 
 class CourseBase(BaseModel):
@@ -42,6 +42,6 @@ class CourseResponse(CourseBase):
     students: List[StudentResponse] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 StudentResponse.update_forward_refs()
