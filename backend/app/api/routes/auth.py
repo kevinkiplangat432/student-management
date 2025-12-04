@@ -1,7 +1,15 @@
-from fastapi import APIRouter
+from fastapi import APIRouter # api router from Fastapi
 
-router = APIRouter()
+# create a router instance which will hold allauth related endpoints
+router = APIRouter() 
 
-@router.get("/status")
+#get the end point.
+@router.get()
 def auth_status():
-    return {"auth": "ready"}
+    return {}
+
+
+
+
+#study:
+# apirouter allows me to group related endpoints together.

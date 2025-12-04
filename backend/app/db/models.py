@@ -5,7 +5,7 @@ from sqlalchemy.orm import relationship, declarative_base
 #all models will inherit from this Base
 Base = declarative_base()
 
-# Many-to-Many between Students and Courses
+# Many-to-Many between Students and Courses withouth ORM just association
 enrollments_table = Table(
     "enrollments",
     Base.metadata,
@@ -14,10 +14,10 @@ enrollments_table = Table(
 )
 
 class User(Base):
-    __tablename__ = "users"
+    __tablename__ = "users" 
 
     id = Column(Integer, primary_key=True, index=True)
-    username = Column(String, unique=True, nullable=False)
+    username = Column(String, unique=True, nullable=False) #nullable is required field
     email = Column(String, unique=True, nullable=False)
     hashed_password = Column(String, nullable=False)
     role = Column(String, default="student")  # or 'admin'

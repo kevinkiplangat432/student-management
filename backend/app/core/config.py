@@ -1,4 +1,6 @@
-from pydantic_settings import BaseSettings
+# import setting management
+# 
+from pydantic_settings import BaseSettings # handleenvironment varialbles with validation
 import os
 
 class Settings(BaseSettings):
