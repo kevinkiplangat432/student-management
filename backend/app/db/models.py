@@ -1,6 +1,8 @@
+
 from sqlalchemy import Column, Integer, String, ForeignKey, Table
 from sqlalchemy.orm import relationship, declarative_base
 
+#all models will inherit from this Base
 Base = declarative_base()
 
 # Many-to-Many between Students and Courses
