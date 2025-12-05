@@ -9,7 +9,7 @@ from app.api.routes import auth, users, students, courses,enrollment
 app = FastAPI(title="Student Management System API") # create a Fast APIinstance
 
 #register route modules with the app.
-app.include_router(auth.router, prefix="/auth", tags=["Auth"])
+app.include_router(auth.router, tags=["Auth"])
 app.include_router(users.router, tags=["Users"]) 
 app.include_router(students.router, tags=["Students"])  
 app.include_router(courses.router, tags=["Courses"])

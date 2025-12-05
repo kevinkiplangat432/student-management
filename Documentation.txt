@@ -17,14 +17,16 @@ FOLDER STRUCTURE IS LIKE THIS:( if incase by any chance i added files and forgot
 ├── alembic.ini
 ├── app
 │   ├── api
-│   │   ├── deps.py
 │   │   └── routes
 │   │       ├── auth.py
+│   │       ├── courses.py
 │   │       ├── enrollment.py
 │   │       ├── __pycache__
 │   │       │   ├── auth.cpython-312.pyc
 │   │       │   ├── enrollement.cpython-312.pyc
+│   │       │   ├── enrollment.cpython-312.pyc
 │   │       │   └── users.cpython-312.pyc
+│   │       ├── students.py
 │   │       └── users.py
 │   ├── core
 │   │   ├── config.py
@@ -57,14 +59,12 @@ FOLDER STRUCTURE IS LIKE THIS:( if incase by any chance i added files and forgot
 │   ├── README
 │   ├── script.py.mako
 │   └── versions
+│       ├── 8bf2a185acbc_update_user_model_for_firebase.py
 │       ├── 9562aeaa3c20_create_users_table.py
 │       ├── ff0a90d06777_add_students_courses_enrollment_table.py
 │       └── __pycache__
+│           ├── 8bf2a185acbc_update_user_model_for_firebase.cpython-312.pyc
 │           ├── 9562aeaa3c20_create_users_table.cpython-312.pyc
 │           └── ff0a90d06777_add_students_courses_enrollment_table.cpython-312.pyc
 ├── Pipfile
 └── Pipfile.lock
-
-
-
-
