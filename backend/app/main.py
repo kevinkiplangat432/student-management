@@ -3,7 +3,7 @@
 
 
 from fastapi import FastAPI
-from app.api.routes import auth, users, students, courses,enrollment
+from app.api.routes import auth, users, students, courses, enrollment
 
 #handle http requests.
 app = FastAPI(title="Student Management System API") # create a Fast APIinstance
@@ -13,7 +13,7 @@ app.include_router(auth.router, tags=["Auth"])
 app.include_router(users.router, tags=["Users"]) 
 app.include_router(students.router, tags=["Students"])  
 app.include_router(courses.router, tags=["Courses"])
-app.include_router(enrollment.router, prefix="/enrollments", tags=["Enrollments"])
+app.include_router(enrollment.router, tags=["Enrollments"])
 
 @app.get("/")
 def root():

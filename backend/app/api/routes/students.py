@@ -12,7 +12,7 @@ router = APIRouter(prefix="/students", tags=["Students"])
 def create_student(
     student: StudentCreate, 
     db: Session = Depends(get_db),
-    current_user = Depends(get_current_admin)
+    # current_user = Depends(get_current_admin)
 ):
     # Check if student with email already exists
     existing = db.query(Student).filter(Student.email == student.email).first()

@@ -6,8 +6,10 @@ import os
 class Settings(BaseSettings):
     DATABASE_URL: str
     FIREBASE_CREDENTIALS: str
+    DEBUG: bool = False
 
     class Config:
         env_file = ".env"
+        extra = "ignore"
 
 settings = Settings()
