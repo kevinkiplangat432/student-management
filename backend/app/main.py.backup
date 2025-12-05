@@ -1,25 +1,30 @@
+# in this file  i import fast Api and route modules.
+# routes modules are impported to registyer them with app.
+
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.routes import auth, users, students, courses, enrollment
 from app.core.config import settings
-
+#handle http requests.
 app = FastAPI(
     title="Student Management System API",
     version="1.0.0",
-    docs_url="/docs" if settings.DEBUG else None,
-    redoc_url="/redoc" if settings.DEBUG else None,
-)
+    docs_url="/docs" if settings.debug else None,
+    redoc_url="/redoc" if settings.debug else None,
+    ) # create a Fast APIinstance
+
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origins,
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-    allow_headers=["Authorization", "Content-Type", "Accept", "Origin", "X-Requested-With", "Access-Control-Allow-Origin"],
+    allow_headers=["Authorization", "Content-Type", "Accept". "Origin", "X-Requested-With", "Access-Control-Allow-Origin"],
     expose_headers=["Content-Disposition"],
-    max_age=600,
-)
-
+    max_age=600,  #10 minutes
+)    
+#register route modules with the app.
 app.include_router(auth.router, tags=["Auth"])
 app.include_router(users.router, tags=["Users"]) 
 app.include_router(students.router, tags=["Students"])  
@@ -31,9 +36,16 @@ def root():
     return {
         "message": "Student Management Backend Running",
         "version": "1.0.0",
-        "docs": "/docs" if settings.DEBUG else "Disabled in production"
-    }
+        "docs": "/docs" if settings.debug else "Disabled in production"
+        }
 
 @app.get("/health")
 def health_check():
     return {"status": "healthy", "service": "student-management-api"}
+
+#study:
+# include_router() connect each module's route to the main app.
+# app.include_router
+# (auth.router
+# , prefix="/auth", this means all routes in auth.router will start with /auth 
+# tags=["Auth"]) this syntax groups these endpoints in the auto generated APi docs
