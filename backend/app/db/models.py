@@ -15,12 +15,10 @@ enrollments_table = Table(
 
 class User(Base):
     __tablename__ = "users" 
-
-    id = Column(Integer, primary_key=True, index=True)
-    username = Column(String, unique=True, nullable=False) #nullable is required field
-    email = Column(String, unique=True, nullable=False)
-    hashed_password = Column(String, nullable=False)
-    role = Column(String, default="student")  # or 'admin'
+    id = Column(Integer, primary_key = True, index=True)
+    uid = Column(String, unique=True, nullable=False, index=True)
+    role = Column(String, default="student") # or admin
+    email =Column(String, nullable=True, unique=True)
 
 class Student(Base):
     __tablename__ = "students"

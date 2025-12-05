@@ -1,13 +1,4 @@
-from pydantic import BaseModel
-from app.schemas.user import UserRead, UserCreate
 
-class UserRead(BaseModel):
-    id: int
-    uid: str
-    role: str
-
-    class Config:
-        from_attributes = True
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
