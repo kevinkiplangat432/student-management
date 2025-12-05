@@ -4,11 +4,16 @@ from typing import List
 from app.db.models import Student
 from app.schemas.schemas import StudentCreate, StudentResponse
 from app.db.sessions import get_db
+from app.api.deps import get_current_admin, get_current_user
 
 router = APIRouter(prefix="/students", tags=["Students"])
 
 @router.post("/", response_model=StudentResponse)
-def create_student(student: StudentCreate, db: Session = Depends(get_db)):
+def create_student(
+    student: StudentCreate, 
+    db: Session = Depends(get_db),
+    current_user = Depends(get_current_admin)
+):
     # Check if student with email already exists
     existing = db.query(Student).filter(Student.email == student.email).first()
     if existing:
@@ -19,7 +24,8 @@ def create_student(student: StudentCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_student)
     return new_student
-
+    
+#get all students
 @router.get("/", response_model=List[StudentResponse])
 def get_all_students(db: Session = Depends(get_db)):
     return db.query(Student).all()
