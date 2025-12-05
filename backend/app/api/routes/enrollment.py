@@ -6,7 +6,7 @@ from pydantic import BaseModel
 
 router = APIRouter(prefix="/enrollments", tags=["Enrollments"])
 
-# Simple schemas
+
 class EnrollmentCreate(BaseModel):
     student_id: int
     course_id: int

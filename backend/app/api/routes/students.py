@@ -7,7 +7,7 @@ from pydantic import BaseModel
 
 router = APIRouter(prefix="/students", tags=["Students"])
 
-# Simple schemas defined right here
+
 class StudentCreate(BaseModel):
     name: str
     email: str
@@ -20,7 +20,7 @@ class StudentResponse(BaseModel):
     class Config:
         from_attributes = True
 
-# CREATE STUDENT
+# create student
 @router.post("/", response_model=StudentResponse)
 def create_student(
     student: StudentCreate, 
@@ -36,12 +36,12 @@ def create_student(
     db.refresh(new_student)
     return new_student
     
-# GET ALL STUDENTS
+# get all students
 @router.get("/", response_model=List[StudentResponse])
 def get_all_students(db: Session = Depends(get_db)):
     return db.query(Student).all()
 
-# GET SPECIFIC STUDENT
+# get a specific student
 @router.get("/{student_id}", response_model=StudentResponse)
 def get_student(student_id: int, db: Session = Depends(get_db)):
     student = db.query(Student).filter(Student.id == student_id).first()
@@ -49,7 +49,7 @@ def get_student(student_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Student not found")
     return student
 
-# UPDATE STUDENT
+# update student
 @router.put("/{student_id}", response_model=StudentResponse)
 def update_student(
     student_id: int, 
@@ -71,7 +71,7 @@ def update_student(
     db.refresh(student)
     return student
 
-# DELETE STUDENT
+# delete student
 @router.delete("/{student_id}")
 def delete_student(student_id: int, db: Session = Depends(get_db)):
     student = db.query(Student).filter(Student.id == student_id).first()

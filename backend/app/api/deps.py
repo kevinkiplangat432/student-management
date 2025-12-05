@@ -12,23 +12,11 @@ async def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(security),
     db: Session = Depends(get_db)
 ) -> User:
-    """
-    Dependency to get current user from Firebase token.
-    Verifies Firebase ID token and gets/creates local user.
-    
-    Usage in routes:
-    ```python
-    @router.get("/protected")
-    def protected_endpoint(current_user: User = Depends(get_current_user)):
-        return {"user_id": current_user.id}
-    ```
-    """
+  
     try:
-        # Verify the Firebase ID token
         decoded_token = auth.verify_id_token(credentials.credentials)
         uid = decoded_token["uid"]
         
-        # Get user from local database
         user = db.query(User).filter(User.uid == uid).first()
         
         # If user doesn't exist, create them
