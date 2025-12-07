@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.routes import auth, users, students, courses, enrollment
 from app.core.config import settings
+import os
 
 app = FastAPI(
     title="Student Management System API",
@@ -40,3 +41,13 @@ def root():
 @app.get("/health")
 def health_check():
     return {"status": "healthy", "service": "student-management-api"}
+
+
+@app.get("/debug")
+def debug_info():
+    return {
+        "database_url_set": bool(os.getenv("DATABASE_URL")),
+        "pg_host": bool(os.getenv("PGHOST")),
+        "firebase_creds": bool(os.getenv("FIREBASE_CREDENTIALS")),
+        "debug_mode": os.getenv("DEBUG"),
+    }

@@ -1,6 +1,6 @@
-# backend/app/core/config.py
-import json
+# config.py
 import os
+import json
 from typing import List
 from pydantic_settings import BaseSettings
 from dotenv import load_dotenv
@@ -8,9 +8,27 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Settings(BaseSettings):
-    DATABASE_URL: str
-    FIREBASE_CREDENTIALS: str
-    DEBUG: bool = True
+    # Build DATABASE_URL from Render's environment variables if available
+    @property
+    def DATABASE_URL(self) -> str:
+        # First, try direct DATABASE_URL
+        db_url = os.getenv("DATABASE_URL", "")
+        if db_url:
+            return db_url
+        
+        # Build from Render's PostgreSQL environment variables
+        if all([
+            os.getenv("PGHOST"),
+            os.getenv("PGDATABASE"),
+            os.getenv("PGUSER"),
+            os.getenv("PGPASSWORD")
+        ]):
+            return f"postgresql://{os.getenv('PGUSER')}:{os.getenv('PGPASSWORD')}@{os.getenv('PGHOST')}:{os.getenv('PGPORT', '5432')}/{os.getenv('PGDATABASE')}"
+        
+        return ""
+    
+    FIREBASE_CREDENTIALS: str = ""
+    DEBUG: bool = os.getenv("DEBUG", "false").lower() == "true"
     
     @property
     def cors_origins(self) -> List[str]:
@@ -25,6 +43,6 @@ class Settings(BaseSettings):
 
     class Config:
         env_file = ".env"
-        extra = "ignore"  # This allows extra fields in .env without validation errors
+        extra = "ignore"
 
 settings = Settings()
