@@ -3,7 +3,7 @@
 A modern, full-featured Student Management System built with cutting-edge technologies. This system combines the power of React's dynamic frontend with Python's robust backend to deliver a seamless administrative experience for educational institutions.
 ### Deployment
 
-#### live link here https://student-management-three-kappa.vercel.app/login
+#### live link here https://student-management-three-kappa.vercel.app/
 
 ### Tech stack 
 #### Frontend
