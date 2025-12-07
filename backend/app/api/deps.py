@@ -5,7 +5,6 @@ from sqlalchemy.orm import Session
 from app.db.models import User
 from app.db.sessions import get_db
 
-# HTTP Bearer token security scheme
 security = HTTPBearer()
 
 async def get_current_user(

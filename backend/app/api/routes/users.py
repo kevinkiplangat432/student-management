@@ -63,7 +63,7 @@ def update_user(
     user_id: int, 
     updated_user: UserCreate, 
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)  # ← Authentication required
+    current_user: User = Depends(get_current_user)  
 ):
     # update a user ..users can update themselves but admins can update anyone
     user = db.query(User).filter(User.id == user_id).first()
@@ -89,7 +89,6 @@ def update_user(
     db.refresh(user)
     return user
 
-# DELETE USER - Admin only (users shouldn't delete themselves)
 @router.delete("/{user_id}")
 def delete_user(
     user_id: int, 

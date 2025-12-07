@@ -13,7 +13,7 @@ class UserRead(BaseModel):
 class UserCreate(BaseModel):
     uid: str
     role: str
-    # add password or other fields if required
+    
 
     class Config:
         from_attributes = True

@@ -18,7 +18,7 @@ def init_firebase():
             cred_dict = json.loads(firebase_creds)
             cred = credentials.Certificate(cred_dict)
             firebase_admin.initialize_app(cred)
-            print("✅ Firebase initialized successfully")
+            print("Firebase initialized successfully")
         except json.JSONDecodeError as e:
             print(f" Error parsing FIREBASE_CREDENTIALS: {e}")
             raise

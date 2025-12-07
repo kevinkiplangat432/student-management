@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Settings(BaseSettings):
-    # Build DATABASE_URL from Render's environment variables if available
     @property
     def DATABASE_URL(self) -> str:
         # First, try direct DATABASE_URL
