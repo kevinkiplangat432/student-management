@@ -1,29 +1,29 @@
-// frontend/vite.config.js
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  server: {
-    port: 5173,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8000',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
-      }
-    }
-  },
   build: {
-    outDir: 'dist',
-    sourcemap: true,
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          firebase: ['firebase/app', 'firebase/auth']
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
+              return 'vendor-react'
+            }
+            if (id.includes('firebase')) {
+              return 'vendor-firebase'
+            }
+            if (id.includes('axios')) {
+              return 'vendor-axios'
+            }
+            return 'vendor-other'
+          }
         }
       }
     }
-  }
+  },
+  server: {
+    port: 5173,
+  },
 })
