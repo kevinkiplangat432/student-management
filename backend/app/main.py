@@ -1,3 +1,4 @@
+# backend/app/main.py
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.routes import auth, users, students, courses, enrollment
@@ -10,16 +11,17 @@ app = FastAPI(
     redoc_url="/redoc" if settings.DEBUG else None,
 )
 
+# CORS Configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-    allow_headers=["Authorization", "Content-Type", "Accept", "Origin", "X-Requested-With", "Access-Control-Allow-Origin"],
-    expose_headers=["Content-Disposition"],
-    max_age=600,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["*"],
 )
 
+# Include routers
 app.include_router(auth.router, tags=["Auth"])
 app.include_router(users.router, tags=["Users"]) 
 app.include_router(students.router, tags=["Students"])  
@@ -31,7 +33,8 @@ def root():
     return {
         "message": "Student Management Backend Running",
         "version": "1.0.0",
-        "docs": "/docs" if settings.DEBUG else "Disabled in production"
+        "docs": "/docs" if settings.DEBUG else "Disabled in production",
+        "cors_origins": settings.cors_origins
     }
 
 @app.get("/health")
