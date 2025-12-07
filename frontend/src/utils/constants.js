@@ -1,6 +1,5 @@
-// frontend/src/utils/constants.js
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://school-management-backend.onrender.com';
-export const APP_NAME = import.meta.env.VITE_APP_NAME || 'Student Management System';
+export const API_BASE_URL = 'https://student-management-nauy.onrender.com';
+export const APP_NAME = 'Student Management System';
 
 export const ROUTES = {
   HOME: '/',
